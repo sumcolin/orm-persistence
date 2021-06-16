@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mybatis.orm.dao.IOrderDao">
+
+    <resultMap id="orderUserMap" type="com.mybatis.orm.pojo.Order">
+        <id property="id" column="id"/>
+        <result property="orderTime" column="ordertime" ></result>
+        <result property="total" column="total" ></result>
+        <result property="uid" column="uid" ></result>
+        <association property="user" column="uid" javaType="com.mybatis.orm.pojo.User" select="com.mybatis.orm.dao.IUserDao.selectUserById">
+            <id property="id" column="id"/>
+            <result property="username" column="username"/>
+            <result property="password" column="password"/>
+            <result property="birthday" column="birthday"/>
+        </association>
+    </resultMap>
+
+    <select id="selectOrderAndUser" resultType="com.mybatis.orm.pojo.Order" parameterType="java.lang.String">
+        select * from orders o,user u where o.id = #{id}  AND o.uid = u.id
+    </select>
+
+
+    <select id="selectOrderById" parameterType="java.lang.String" resultMap="orderUserMap">
+        select * from orders where id = #{id}
+    </select>
+
+    <select id="selectOrderByUserId" parameterType="java.lang.String" resultMap="orderUserMap">
+        select * from orders where uid = #{id}
+    </select>
+
+</mapper>

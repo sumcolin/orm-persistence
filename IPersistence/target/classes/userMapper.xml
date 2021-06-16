@@ -1,0 +1,11 @@
+<mapper namespace="user">
+
+    <select id="selectAll" resultType="com.persistence.orm">
+        select * from user
+    </select>
+
+    <select id="selectOne" parameterType="com.persistence.orm">
+        select * from user where id = #{id}
+    </select>
+
+</mapper>

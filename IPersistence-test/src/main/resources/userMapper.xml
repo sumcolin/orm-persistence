@@ -1,0 +1,24 @@
+<mapper namespace="com.persistence.orm.dao.IUserDao">
+
+    <select id="selectAll" resultType="com.persistence.orm.pojo.User">
+        select * from user
+    </select>
+
+    <select id="selectOne" resultType="com.persistence.orm.pojo.User" parameterType="com.persistence.orm.pojo.User">
+        select * from user where id = #{id}
+    </select>
+
+    <update id="updateById" parameterType="com.persistence.orm.pojo.User">
+        update user set username = #{username} , password = #{password} , birthday = #{birthday} where id = #{id}
+    </update>
+
+    <insert id="insertUser" parameterType="com.persistence.orm.pojo.User">
+        INSERT INTO user (`id`, `username`, `password`, `birthday`)
+        VALUES (#{id}, #{username}, #{password}, #{birthday} )
+    </insert>
+
+    <delete id="deleteUserById" parameterType="com.persistence.orm.pojo.User">
+        delete from user where id = #{id}
+    </delete>
+
+</mapper>
